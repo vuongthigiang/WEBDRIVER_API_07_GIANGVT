@@ -3,6 +3,7 @@ package selenium_api;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -15,14 +16,15 @@ public class Topic_01_CheckEnvironment {
 	@BeforeClass
 	public void beforeClass() {
 		// Chrome
-//		System.setProperty("webdriver.chrome.driver", ".\\lib\\chromedriver.exe");
-//		driver = new ChromeDriver();
+		System.setProperty("webdriver.chrome.driver", ".\\lib\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.get("https://www.google.com/");
 
 		// Firefox
-		driver = new FirefoxDriver();
+/*		driver = new FirefoxDriver();
 		driver.get("https://www.google.com/");
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);*/
 	}
 
 	@Test
