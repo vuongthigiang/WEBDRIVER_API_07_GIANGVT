@@ -1,11 +1,13 @@
 package selenium_api;
 import org.testng.annotations.Test;
+
 import org.testng.annotations.BeforeClass;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
 public class Topic_03_WebBrowser_WebElement {
@@ -30,6 +32,7 @@ public class Topic_03_WebBrowser_WebElement {
 
 	@AfterClass
 	public void afterClass() {
+		System.setProperty("webdriver.chrome.driver", ".\\lib\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get("https://daominhdam.github.io/basic-form/index.html");
 		driver.manage().window().maximize();
@@ -38,51 +41,46 @@ public class Topic_03_WebBrowser_WebElement {
 
 	@Test
 	public void TC_01_CheckDisplay() {
-		if (isControlDisplay(under18ByRadio)) {
+		if(isControlDisplay(emailTextbox)) {
+			driver.findElement(emailTextbox).sendKeys("Automation Testing");
+		}
+		if(isControlDisplay(under18ByRadio)) {
 			driver.findElement(under18ByRadio).click();
 		}
-		if (isControlDisplay(developmentByCheckbox)) {
-			driver.findElement(developmentByCheckbox).click();
+		if(isControlDisplay(educationByTextArea)) {
+			driver.findElement(educationByTextArea).sendKeys("Automation Testing");
 		}
 		
 	}
 
-	public void TC_02_CheckEnable() {
+/*	public void TC_02_CheckEnable() {
 		//check enable
-		isControlEnable(emailTextbox);
-		isControlEnable(educationByTextArea);
-		isControlEnable(under18ByRadio);
-		isControlEnable(jobRole1ByDropdown);
-		isControlEnable(developmentByCheckbox);
-		isControlEnable(slide01);
-		isControlEnable(buttonEnable);
-		
+		Assert.assertTrue(isControlEnable(emailTextbox));
+		Assert.assertTrue(isControlEnable(educationByTextArea));
+		Assert.assertTrue(isControlEnable(under18ByRadio));
+		Assert.assertTrue(isControlEnable(jobRole1ByDropdown));
+		Assert.assertTrue(isControlEnable(developmentByCheckbox));
+		Assert.assertTrue(isControlEnable(slide01));
+		Assert.assertTrue(isControlEnable(buttonEnable));
 		//check disable
-		isControlEnable(passTextbox);
-		isControlEnable(radioByRadio);
-		isControlEnable(biographyTextbox);
-		isControlEnable(jobRole2ByDropdown);
-		isControlEnable(checkboxByCheckbox);
-		isControlEnable(slide02);
-		isControlEnable(buttonDisable);
-		
+		Assert.assertFalse(isControlEnable(passTextbox));
+		Assert.assertFalse(isControlEnable(radioByRadio));
+		Assert.assertFalse(isControlEnable(biographyTextbox));
+		Assert.assertFalse(isControlEnable(jobRole2ByDropdown));
+		Assert.assertFalse(isControlEnable(checkboxByCheckbox));
+		Assert.assertFalse(isControlEnable(slide02));
+		Assert.assertFalse(isControlEnable(buttonDisable));
 	}
 
 	public void TC_03_CheckSelected() {
-		if (isControlDisplay(emailTextbox)) {
-			driver.findElement(emailTextbox).sendKeys("Automation Testing");
+		if(isControlDisplay(under18ByRadio)) {
+			driver.findElement(under18ByRadio).click();
 		}
-		if (isControlDisplay(educationByTextArea)) {
-			driver.findElement(educationByTextArea).sendKeys("Automation Testing");
-		}
-		if (isControlDisplay(under18ByRadio)) {
-			driver.findElement(educationByTextArea).click();
-		}
-		if (isControlDisplay(addressByTextbox)) {
-			driver.findElement(educationByTextArea).sendKeys("Automation Testing");
+		if(isControlDisplay(developmentByCheckbox)) {
+			driver.findElement(developmentByCheckbox).click();
 		}
 	}
-
+*/
 	@BeforeClass
 	public void beforeClass() {
 	}
