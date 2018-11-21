@@ -1,5 +1,7 @@
 package selenium_api;
 
+import java.util.Random;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -76,21 +78,27 @@ public class Topic_02_WebElement {
 		Assert.assertEquals(acPassIncorrectMess, exPassIncorrectMess);
 	}
 	public void TC_06_CreateAnAccount() throws InterruptedException {
+		String randomEmail = "seleniumonline" + randomEmail() + "@gmail.com";
+		
 		driver.findElement(By.xpath("//*[@id='top']/body/div/div/div[3]/div/div[4]/ul/li[1]/a")).click();
 		driver.findElement(By.xpath("//*[@id='login-form']/div/div[1]/div[2]/a/span/span")).click();
-		driver.findElement(By.id("firstname")).sendKeys("");
-		driver.findElement(By.id("middlename")).sendKeys("");
-		driver.findElement(By.id("lastname")).sendKeys("");
-		driver.findElement(By.id("email_address")).sendKeys("");
-		driver.findElement(By.id("password")).sendKeys("");
-		driver.findElement(By.id("confirmation")).sendKeys("");
+		driver.findElement(By.id("firstname")).sendKeys("Selenium");
+		driver.findElement(By.id("lastname")).sendKeys("Online 07");
+		driver.findElement(By.id("email_address")).sendKeys("randomEmail");
+		driver.findElement(By.className("validate-password")).sendKeys("123123");
+		driver.findElement(By.className("validate-cpassword")).sendKeys("123123");
+		driver.findElement(By.xpath("//*[@id='form-validate']/d		iv[2]/button")).click();
 		
-		driver.findElement(By.xpath("//*[@id='form-validate']/div[2]/button")).click();
+		Assert.assertTrue(driver.findElement(By.xpath("//span[text() = 'Thank you for registering with Main Website Store.'")).isDisplayed());
 		
+	}
+	
+	
+	public int randomEmail() {
+		Random random = new Random();
+		int number = random.nextInt(999999);
+		return number;
 		
-		String acCreateSuccessMess = driver.findElement(By.xpath("")).getText();
-		String exCreateSuccessMess = "Thank you for registering with Main Website Store.";
-		Assert.assertEquals(acCreateSuccessMess, exCreateSuccessMess);
 	}
 	@AfterClass
 	public void afterClass() {
