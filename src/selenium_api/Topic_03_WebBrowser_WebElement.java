@@ -30,8 +30,8 @@ public class Topic_03_WebBrowser_WebElement {
 	By buttonDisable = By.xpath("//input[@id='button-disabled']");
 
 
-	@AfterClass
-	public void afterClass() {
+	@BeforeClass
+	public void beforeClass() {
 		System.setProperty("webdriver.chrome.driver", ".\\lib\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get("https://daominhdam.github.io/basic-form/index.html");
@@ -81,8 +81,8 @@ public class Topic_03_WebBrowser_WebElement {
 		}
 	}
 
-	@BeforeClass
-	public void beforeClass() {
+	@AfterClass
+	public void afterClass() {
 	}
 
 	public boolean isControlDisplay(By by) {
