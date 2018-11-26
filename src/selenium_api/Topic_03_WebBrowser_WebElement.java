@@ -53,7 +53,7 @@ public class Topic_03_WebBrowser_WebElement {
 		
 	}
 
-/*	public void TC_02_CheckEnable() {
+	public void TC_02_CheckEnable() {
 		//check enable
 		Assert.assertTrue(isControlEnable(emailTextbox));
 		Assert.assertTrue(isControlEnable(educationByTextArea));
@@ -80,7 +80,7 @@ public class Topic_03_WebBrowser_WebElement {
 			driver.findElement(developmentByCheckbox).click();
 		}
 	}
-*/
+
 	@BeforeClass
 	public void beforeClass() {
 	}
