@@ -4,7 +4,6 @@ import org.testng.annotations.Test;
 
 import org.testng.annotations.BeforeClass;
 
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -45,7 +44,7 @@ public class Topic_04_HTML {
 		newState = "Sa pa";
 		newPin = "123456";
 		newPhone = "01638097067";
-		newEmail = "autotest" + randomEmail() + "@gmail.com";
+		newEmail = "autotest" + Common.randomEmail() + "@gmail.com";
 		newPass = "123123";
 		
 		editAddr = "234 edit address";
@@ -53,7 +52,7 @@ public class Topic_04_HTML {
 		editState = "Ha noi";
 		editEmail = "234567";
 		editPhone = "0957867435";
-		editPin = "edittest\" + randomEmail() + \"@gmail.com";
+		editPin = "edittest" + Common.randomEmail() + "@gmail.com";
 	}
 
 	@Test
@@ -144,22 +143,6 @@ public class Topic_04_HTML {
 	@AfterClass
 	public void afterClass() {
 
-	}
-
-	public boolean isControlDisplay(By by) {
-		WebElement element = driver.findElement(by);
-		if (element.isDisplayed()) {
-			System.out.println("Element [" + by + "] is displayed");
-			return true;
-		} else {
-			System.out.println("Element [" + by + "] is not displayed");
-			return false;
-		}
-	}
-	public int randomEmail() {
-		Random random = new Random();
-		int number = random.nextInt(999999);
-		return number;
 	}
 }
 

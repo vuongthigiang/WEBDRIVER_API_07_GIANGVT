@@ -41,13 +41,13 @@ public class Topic_03_WebBrowser_WebElement {
 
 	@Test
 	public void TC_01_CheckDisplay() {
-		if(isControlDisplay(emailTextbox)) {
+		if(Common.isControlDisplay(emailTextbox, driver)) {
 			driver.findElement(emailTextbox).sendKeys("Automation Testing");
 		}
-		if(isControlDisplay(under18ByRadio)) {
+		if(Common.isControlDisplay(under18ByRadio, driver)) {
 			driver.findElement(under18ByRadio).click();
 		}
-		if(isControlDisplay(educationByTextArea)) {
+		if(Common.isControlDisplay(educationByTextArea, driver)) {
 			driver.findElement(educationByTextArea).sendKeys("Automation Testing");
 		}
 		
@@ -55,28 +55,28 @@ public class Topic_03_WebBrowser_WebElement {
 
 	public void TC_02_CheckEnable() {
 		//check enable
-		Assert.assertTrue(isControlEnable(emailTextbox));
-		Assert.assertTrue(isControlEnable(educationByTextArea));
-		Assert.assertTrue(isControlEnable(under18ByRadio));
-		Assert.assertTrue(isControlEnable(jobRole1ByDropdown));
-		Assert.assertTrue(isControlEnable(developmentByCheckbox));
-		Assert.assertTrue(isControlEnable(slide01));
-		Assert.assertTrue(isControlEnable(buttonEnable));
+		Assert.assertTrue(Common.isControlEnable(emailTextbox, driver));
+		Assert.assertTrue(Common.isControlEnable(educationByTextArea, driver));
+		Assert.assertTrue(Common.isControlEnable(under18ByRadio, driver));
+		Assert.assertTrue(Common.isControlEnable(jobRole1ByDropdown, driver));
+		Assert.assertTrue(Common.isControlEnable(developmentByCheckbox, driver));
+		Assert.assertTrue(Common.isControlEnable(slide01, driver));
+		Assert.assertTrue(Common.isControlEnable(buttonEnable, driver));
 		//check disable
-		Assert.assertFalse(isControlEnable(passTextbox));
-		Assert.assertFalse(isControlEnable(radioByRadio));
-		Assert.assertFalse(isControlEnable(biographyTextbox));
-		Assert.assertFalse(isControlEnable(jobRole2ByDropdown));
-		Assert.assertFalse(isControlEnable(checkboxByCheckbox));
-		Assert.assertFalse(isControlEnable(slide02));
-		Assert.assertFalse(isControlEnable(buttonDisable));
+		Assert.assertFalse(Common.isControlEnable(passTextbox, driver));
+		Assert.assertFalse(Common.isControlEnable(radioByRadio, driver));
+		Assert.assertFalse(Common.isControlEnable(biographyTextbox, driver));
+		Assert.assertFalse(Common.isControlEnable(jobRole2ByDropdown, driver));
+		Assert.assertFalse(Common.isControlEnable(checkboxByCheckbox, driver));
+		Assert.assertFalse(Common.isControlEnable(slide02, driver));
+		Assert.assertFalse(Common.isControlEnable(buttonDisable, driver));
 	}
 
 	public void TC_03_CheckSelected() {
-		if(isControlDisplay(under18ByRadio)) {
+		if(Common.isControlDisplay(under18ByRadio, driver)) {
 			driver.findElement(under18ByRadio).click();
 		}
-		if(isControlDisplay(developmentByCheckbox)) {
+		if(Common.isControlDisplay(developmentByCheckbox, driver)) {
 			driver.findElement(developmentByCheckbox).click();
 		}
 	}
@@ -85,35 +85,6 @@ public class Topic_03_WebBrowser_WebElement {
 	public void afterClass() {
 	}
 
-	public boolean isControlDisplay(By by) {
-		WebElement element = driver.findElement(by);
-		if (element.isDisplayed()) {
-			System.out.println("Element [" + by + "] is displayed");
-			return true;
-		} else {
-			System.out.println("Element [" + by + "] is not displayed");
-			return false;
-		}
-	}
-	public boolean isControlEnable(By by) {
-		WebElement element = driver.findElement(by);
-		if (element.isEnabled()) {
-			System.out.println("Element [" + by + "] is enable");
-			return true;
-		} else {
-			System.out.println("Element [" + by + "] is disable");
-			return false;
-		}
-	}
-	public boolean isControlSelected(By by) {
-		WebElement element = driver.findElement(by);
-		if (element.isSelected()) {
-			System.out.println("Element [" + by + "] is selected");
-			return true;
-		} else {
-			System.out.println("Element [" + by + "] is not selected");
-			return false;
-		}
-	}
+	
 
 }
