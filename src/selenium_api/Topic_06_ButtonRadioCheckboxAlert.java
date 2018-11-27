@@ -72,21 +72,4 @@ public class Topic_06_ButtonRadioCheckboxAlert {
 		driver.quit();
 
 	}
-
-	public boolean isControlDisplay(By by) {
-		WebElement element = driver.findElement(by);
-		if (element.isDisplayed()) {
-			System.out.println("Element [" + by + "] is displayed");
-			return true;
-		} else {
-			System.out.println("Element [" + by + "] is not displayed");
-			return false;
-		}
-	}
-
-	public int randomEmail() {
-		Random random = new Random();
-		int number = random.nextInt(999999);
-		return number;
-	}
 }
