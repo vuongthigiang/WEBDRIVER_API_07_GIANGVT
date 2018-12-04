@@ -1,6 +1,7 @@
 package selenium_api;
 
 import java.util.Random;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -49,6 +50,45 @@ public class Common {
 			System.out.println("Element [" + by + "] is not selected");
 			return false;
 		}
+	}
+	
+
+	// đúng trong trường hợp có 2 cửa sổ
+	public static void switchToWindowByID(String parentID, WebDriver driver) {
+		Set<String> allWindows = driver.getWindowHandles();
+		for (String runWindow : allWindows) {
+			if (!runWindow.equals(parentID)) {
+				driver.switchTo().window(runWindow);
+				break;
+			}
+		}
+	}
+
+	// đúng trong trường hợp có >= 2 cửa sổ
+	public static void switchToWindowByTitle(String title, WebDriver driver) {
+		Set<String> allWindowID = driver.getWindowHandles();
+		for (String runWindows : allWindowID) {
+			driver.switchTo().window(runWindows);
+			String currentWin = driver.getTitle();
+			if (currentWin.equals(title)) {
+				break;
+			}
+		}
+	}
+
+	public static boolean closeAllWithoutParentWindows(String parentWindow, WebDriver driver) {
+		Set<String> allWindows = driver.getWindowHandles();
+		for (String runWindows : allWindows) {
+			if (!runWindows.equals(parentWindow)) {
+				driver.switchTo().window(runWindows);
+				driver.close();
+			}
+		}
+		driver.switchTo().window(parentWindow);
+		if (driver.getWindowHandles().size() == 1)
+			return true;
+		else
+			return false;
 	}
 
 }
