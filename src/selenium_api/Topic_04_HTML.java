@@ -131,15 +131,7 @@ public class Topic_04_HTML {
 		Assert.assertEquals(driver.findElement(By.xpath("//td[text() = 'Pin']/following-sibling::td")).getText(), editPin);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[text() = 'Mobile No.']/following-sibling::td")).getText(), editPhone);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[text() = 'Email']/following-sibling::td")).getText(), editEmail);
-		
-		
-
 	}
-
-	public void TC_03_CustomDropDown_List() {
-
-	}
-
 	@AfterClass
 	public void afterClass() {
 
