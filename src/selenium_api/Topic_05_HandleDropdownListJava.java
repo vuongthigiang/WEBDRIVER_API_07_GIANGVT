@@ -33,7 +33,6 @@ public class Topic_05_HandleDropdownListJava {
 
 	}
 
-
 	public void TC_01_HTML_Dropdown() throws InterruptedException {
 		/*
 		 * Step 01 - Truy cập vào trang:
@@ -88,7 +87,7 @@ public class Topic_05_HandleDropdownListJava {
 	@Test
 	public void TC_02_JQuery_Dropdown() throws Exception {
 		driver.get("http://jqueryui.com/resources/demos/selectmenu/default.html");
-		selectItemCustomerDropdown("//div[@class='demo']","//span[@id='number-button']",
+		selectItemCustomerDropdown("//div[@class='demo']", "//span[@id='number-button']",
 				"//ul[@id='number-menu']//li[@class='ui-menu-item']/div", "19");
 		Assert.assertTrue(driver
 				.findElement(By.xpath("//span[@id='number-button']/span[@class='ui-selectmenu-text' and text()='19']"))
@@ -96,17 +95,16 @@ public class Topic_05_HandleDropdownListJava {
 		Thread.sleep(3000);
 	}
 
-	public void selectItemCustomerDropdown(String scrollToXpath, String parentXpath, String childXpath, String expectedItem) throws Exception
+	public void selectItemCustomerDropdown(String scrollToXpath, String parentXpath, String childXpath,
+			String expectedItem) throws Exception
 
 	{
-		//scroll toi element cha
+		// scroll toi element cha
 		javaExcutor.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath(scrollToXpath)));
-		
+
 		// click vao dropdown
 		WebElement element = driver.findElement(By.xpath(parentXpath));
 		element.click();
-		
-		
 
 		// get tat ca item trong dropdown vao list
 		List<WebElement> childList = driver.findElements(By.xpath(childXpath));
@@ -124,7 +122,6 @@ public class Topic_05_HandleDropdownListJava {
 			}
 
 		}
-
 	}
 
 	@AfterClass
