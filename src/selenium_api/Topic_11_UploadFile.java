@@ -6,6 +6,7 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 import org.testng.annotations.BeforeTest;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -33,19 +34,22 @@ public class Topic_11_UploadFile {
 
 	String[] files = { fileNamPath01, fileNamPath02, fileNamPath03 };
 
+	String firefoxPath = rootFolder + "\\uploadFiles\\FirefoxFileUpload.exe";
+	String chromePath = rootFolder + "\\uploadFiles\\ChromeFileUpload.exe";
+	String iePath = rootFolder + "\\uploadFiles\\IEFileUpload.exe";
+
 	@BeforeTest
 	public void beforeTest() {
-		//firefox 
-		//selenium 2.xx + firefox<= 47 + không cần dùng gecko
-		//selenium 3.xx + firefox >= 48 + phải dùng gecko
-		//driver = new FirefoxDriver();
-		System.setProperty("webdriver.chrome.driver", ".\\lib\\chromedriver.exe"); 
-		driver = new ChromeDriver();
+		// firefox
+		// selenium 2.xx + firefox<= 47 + không cần dùng gecko
+		// selenium 3.xx + firefox >= 48 + phải dùng gecko
+		// driver = new FirefoxDriver();
+		// System.setProperty("webdriver.chrome.driver", ".\\lib\\chromedriver.exe");
+		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 	}
-
 
 	public void TC_01_SendKeys() throws Exception {
 		driver.get("http://blueimp.github.com/jQuery-File-Upload/");
@@ -54,7 +58,6 @@ public class Topic_11_UploadFile {
 			WebElement uploadFile = driver.findElement(By.xpath("//input[@type='file']"));
 			uploadFile.sendKeys(file);
 			Thread.sleep(1000);
-
 		}
 
 		driver.findElement(By.xpath("//span[text() = 'Start upload']")).click();
@@ -62,25 +65,57 @@ public class Topic_11_UploadFile {
 		Assert.assertTrue(driver.findElement(By.xpath("//a[text() = '" + fileName02 + "']")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//a[text() = '" + fileName03 + "']")).isDisplayed());
 	}
-	
-	@Test
+
 	public void TC_02_UploadMultiple() throws Exception {
 		driver.get("http://blueimp.github.com/jQuery-File-Upload/");
 
-			WebElement uploadFile = driver.findElement(By.xpath("//input[@type='file']"));
-			uploadFile.sendKeys(fileNamPath01 + "\n" + fileNamPath02 + "\n" + fileNamPath03);
+		WebElement uploadFile = driver.findElement(By.xpath("//input[@type='file']"));
+		uploadFile.sendKeys(fileNamPath01 + "\n" + fileNamPath02 + "\n" + fileNamPath03);
+		Thread.sleep(1000);
+
+		List<WebElement> startButtons = driver.findElements(By.xpath("//span[text() = 'Start']"));
+
+		for (WebElement startButton : startButtons) {
+			startButton.click();
 			Thread.sleep(1000);
-			
-			List <WebElement> startButtons = driver.findElements(By.xpath("//span[text() = 'Start']"));
-			
-			for(WebElement startButton: startButtons ) {
-				startButton.click();
-				Thread.sleep(1000);
-			}
+		}
 		Assert.assertTrue(driver.findElement(By.xpath("//a[text() = '" + fileName01 + "']")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//a[text() = '" + fileName02 + "']")).isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//a[text() = '" + fileName03 + "']")).isDisplayed());
+
+	}
+
+	@Test
+	public void TC_03_AutoIT() throws Exception {
 		
+		driver.get("http://blueimp.github.com/jQuery-File-Upload/");
+		
+		if (driver.toString().contains("firefox")) {
+			WebElement uploadFile = driver.findElement(By.xpath("//input[@type='file']"));
+			Common.clickElementByJavascript(driver, uploadFile);
+			Thread.sleep(3000);
+
+			// Excute file exe
+			Runtime.getRuntime().exec(new String[] { firefoxPath, fileNamPath01 });
+			Thread.sleep(4000);
+		} else if (driver.toString().contains("chrome")) {
+			WebElement uploadFile = driver.findElement(By.cssSelector(".fileinput-button"));
+			uploadFile.click();
+			Thread.sleep(3000);
+
+			// Excute file exe
+			Runtime.getRuntime().exec(new String[] { chromePath, fileNamPath01 });
+			Thread.sleep(4000);
+		} else {
+			WebElement uploadFile = driver.findElement(By.xpath("//span[contain(text(), 'Add file...')]"));
+			uploadFile.click();
+			Thread.sleep(3000);
+
+			// Excute file exe
+			Runtime.getRuntime().exec(new String[] { iePath, fileNamPath01 });
+			Thread.sleep(4000);
+		}
+
 	}
 
 	@AfterTest
